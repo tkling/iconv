@@ -6,14 +6,14 @@ iconv wrapper, used to be ext/iconv
 
 ## Abstract
 
-Iconv is a wrapper class for the UNIX 95 <code>iconv()</code> function family,
+Iconv is a wrapper class for the UNIX 95 `iconv()` function family,
 which translates string between various encoding systems.
 
 See Open Group's on-line documents for more details.
-* <code>iconv.h</code>:       http://www.opengroup.org/onlinepubs/007908799/xsh/iconv.h.html
-* <code>iconv_open()</code>:  http://www.opengroup.org/onlinepubs/007908799/xsh/iconv_open.html
-* <code>iconv()</code>:       http://www.opengroup.org/onlinepubs/007908799/xsh/iconv.html
-* <code>iconv_close()</code>: http://www.opengroup.org/onlinepubs/007908799/xsh/iconv_close.html
+* `iconv.h`:       http://www.opengroup.org/onlinepubs/007908799/xsh/iconv.h.html
+* `iconv_open()`:  http://www.opengroup.org/onlinepubs/007908799/xsh/iconv_open.html
+* `iconv()`:       http://www.opengroup.org/onlinepubs/007908799/xsh/iconv.html
+* `iconv_close()`: http://www.opengroup.org/onlinepubs/007908799/xsh/iconv_close.html
 
 Which coding systems are available is platform-dependent.
 
@@ -35,28 +35,28 @@ Or install it yourself as:
 
 1. Simple conversion between two charsets.
 ```ruby
-     converted_text = Iconv.conv('iso-8859-15', 'utf-8', text)
+ converted_text = Iconv.conv('iso-8859-15', 'utf-8', text)
 ```
 2. Instantiate a new Iconv and use method Iconv#iconv.
 ```ruby
-     cd = Iconv.new(to, from)
-     begin
-       input.each { |s| output << cd.iconv(s) }
-       output << cd.iconv(nil)                   # Don't forget this!
-     ensure
-       cd.close
-     end
+ cd = Iconv.new(to, from)
+ begin
+   input.each { |s| output << cd.iconv(s) }
+   output << cd.iconv(nil)                   # Don't forget this!
+ ensure
+   cd.close
+ end
 ```
 3. Invoke Iconv.open with a block.
 ```ruby
-     Iconv.open(to, from) do |cd|
-       input.each { |s| output << cd.iconv(s) }
-       output << cd.iconv(nil)
-     end
+ Iconv.open(to, from) do |cd|
+   input.each { |s| output << cd.iconv(s) }
+   output << cd.iconv(nil)
+ end
 ```
 4. Shorthand for (3).
 ```ruby
-     Iconv.iconv(to, from, *input.to_a)
+Iconv.iconv(to, from, *input.to_a)
 ```
 ## Attentions
 
